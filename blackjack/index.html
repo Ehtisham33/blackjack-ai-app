@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack AI Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Blackjack AI</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Statistics</a></li>
+                    <li><a href="#">Tips</a></li>
+                    <li><a href="#">Guide</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </nav>
+            <div class="deck-controls">
+                <button id="startCaptureButton">Start Capture</button>
+                <button id="toggleThemeButton">Toggle Theme</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="game-info">
+                <div class="dealer">
+                    <img src="pic.jpg" alt="Dealer" class="dealer-image">
+                    <p class="next-game">NEXT GAME SOON</p>
+                </div>
+                <div class="deck-status">
+                    <h2>Expected Value of Deck</h2>
+                    <p>Deck Ratio is <span class="positive">Positive - 1.25</span></p>
+                    <p>This indicates a favorable condition for betting.</p>
+                    <div class="tracking">
+                        <div>
+                            <h3>Aces Tracking</h3>
+                            <p>Played: 5/24</p>
+                            <p>Expected: 5/24</p>
+                        </div>
+                        <div>
+                            <h3>10s Tracking</h3>
+                            <p>Played: 20/96</p>
+                            <p>Expected: 10/96</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="webcam-container" style="display: none;">
+                <h2>Webcam Capture</h2>
+                <video id="webcam" autoplay></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+            </section>
+
+            <section class="actions">
+                <h3>Next Step</h3>
+                <p>Hit</p>
+                <h3>Increase Bet</h3>
+                <p>+50%</p>
+                <p>The deck favors you. Play strategically.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
