@@ -12,7 +12,7 @@ CORS(app)  # Enable CORS for cross-origin requests
 socketio = SocketIO(app, cors_allowed_origins="*")  # Enable WebSocket communication
 
 # Load YOLOv8 model
-model = YOLO(r'D:\AI-20250112T101556Z-001\AI\results\experiment_fast\weights\best.pt')  # Update with your model's path
+model = YOLO(r'D:\project\playing-card-detection\results\experiment_fast\weights\best.pt')  # Update with your model's path
 
 # Map class IDs to card values (example for Blackjack)
 CARD_VALUES = {
