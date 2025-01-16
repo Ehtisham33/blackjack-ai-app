@@ -1,0 +1,524 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Blackjack AI Dark</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #2b2b2b;
+        color: #fff;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* padding: 20px; */
+      }
+      .header {
+        width: 97%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1a1a1a;
+        padding: 10px 20px;
+      }
+      .header .logo {
+        display: flex;
+        align-items: center;
+      }
+      .header .logo img {
+        height: 40px;
+        margin-right: 10px;
+      }
+      .header .logo h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+      .header nav a {
+        color: #ac9f9f;
+        margin: 0 10px;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .header .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 13%;
+      }
+      .header .controls button {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      .main-content {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 20px;
+      }
+      
+      .left-panel,
+      .right-panel {
+        background-color: #1a1a1a;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+      }
+      .left-panel {
+        flex: 2;
+      }
+      .right-panel {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+      }
+      .left-panel video {
+        width: 100%;
+        border-radius: 10px;
+      }
+      .left-panel .caption {
+        text-align: center;
+        margin-top: 10px;
+        font-weight: 500;
+      }
+      .right-panel .section {
+        background-color: #333;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .right-panel .section h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .right-panel .section p {
+        margin: 0;
+        font-size: 14px;
+      }
+      .right-panel .section .progress-bar {
+        background-color: #444;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .right-panel .section .progress-bar .progress {
+        height: 10px;
+        background-color: #4caf50;
+      }
+      .right-panel .section .tracking {
+        gap: 7px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      .right-panel .section .tracking .item {
+        text-align: center;
+      }
+      .right-panel .section .tracking .item p {
+        margin: 5px 0;
+      }
+      .right-panel .section .tracking .item .value {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .section-1 .chart {
+        margin-top: 10px;
+      }
+      .section-1 .chart .bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .section-1 .chart .bar .label {
+        width: 100px;
+        font-size: 14px;
+      }
+      .section-1 .chart .bar .value {
+        flex: 1;
+        height: 10px;
+        background-color: #4caf50;
+        border-radius: 5px;
+      }
+      .section-1 .chart .bar .value.orange {
+        background-color: #ff9800;
+      }
+      .section-1 .chart .bar .value.purple {
+        background-color: #9c27b0;
+      }
+      .section-1 .chart .bar .value.pink {
+        background-color: #e91e63;
+      }
+      .table-section {
+        background-color: #1a1a1a;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        width: 100%;
+      }
+      .table-section h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .table-section table {
+        width: 100%;
+        color: #fff;
+        border-collapse: collapse;
+      }
+      .back-cover{
+        background-color: #4caf50;
+        border-radius: 6px;
+        width: 100% ;
+      }
+      .back-cover1{
+        background-color: #444;
+        border-radius: 6px;
+        width: 100% ;
+        /* padding: 3%; */
+    } 
+
+      .table-section th,
+      .table-section td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #444;
+      }
+      .section-flex{
+        border: 1px solid grey;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+      }
+      .table-section-1{
+          display: flex;
+          justify-content: center;
+        flex-direction: row;
+        width: 89%;
+      }
+.section-1{
+    margin: 10px;
+    width: 100%;
+    background-color: #333;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+
+}
+      .notification {
+            position: relative;
+            display: inline-block;
+            font-size: 22px;
+            color: rgba(0, 0, 0, 0.5); /* Transparent color for the icon */
+
+        }
+        
+        
+      @media (max-width: 768px) {
+        .main-content {
+          flex-direction: column;
+        }
+        .left-panel,
+        .right-panel,
+        .table-section {
+          margin: 10px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img
+            alt="Blackjack AI logo"
+            height="auto"
+            width="auto"
+            src="./logo.png"
+            width="40"
+          />
+          <nav>
+              <a href="#">Home</a>
+              <a href="#">Statistics</a>
+              <a href="#">Tips</a>
+              <a href="#">Guide</a>
+              <a href="#">About</a>
+              <a href="#">Help</a>
+            </nav>
+        </div>
+        <div class="controls">
+            <span class="notification">
+                🔔
+            </span>
+          <button id="startCapture"><span>&#43;</span>   Start Capture</button>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="left-panel">
+          <video id="video" autoplay playsinline></video>
+          <div class="caption">NEXT GAME SOON</div>
+        </div>
+        <div class="right-panel">
+          <div class="section">
+            <h2>Expected Value of Deck</h2>
+            <p>
+              Deck Ratio is <span style="color: #4caf50">Positive - 1.25</span>
+            </p>
+            <p>This indicates a favorable condition for betting.</p>
+            <div class="progress-bar">
+              <div class="progress" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="section section-flex">
+            <div>
+                <h2><span>&#x2660;</span> Aces Tracking</h2>
+                <div class="tracking">
+              <div class="item back-cover">
+                <p>Played</p>
+                <p class="value">5/24</p>
+              </div>
+              <div class="item back-cover1">
+                <p>Expected</p>
+                <p class="value">5/24</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h2><span>&#x2657;</span> 10s Tracking</h2>
+            <div class="tracking">
+              <div class="item back-cover">
+                <p>Played</p>
+                <p class="value">20/96</p>
+              </div>
+              <div class="item back-cover1">
+                <p>Expected</p>
+                <p class="value">10/96</p>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="section">
+            <h2>Next Step <span style="color: #4caf50;">HIT</span></h2>
+            
+            <p>Based on current deck stats, this is the optimal move.</p>
+          </div>
+          <div class="section">
+            <h2>Increase Bet <span style="color: #4caf50">+50%</span></h2>
+            <p>The deck favors you. Play strategically.</p>
+          </div>
+          <!-- <div class="section">
+            <h2>Statistical Variance from All Decks Analyzed So Far</h2>
+            <div class="chart">
+              <div class="bar">
+                <div class="label">Round 1</div>
+                <div class="value" style="width: 60%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 2</div>
+                <div class="value orange" style="width: 80%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 3</div>
+                <div class="value purple" style="width: 40%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 4</div>
+                <div class="value" style="width: 50%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 5</div>
+                <div class="value pink" style="width: 90%"></div>
+              </div>
+            </div>
+          </div> -->
+        
+        <!-- <div class="right-panel"> -->
+        <div class="section" id="predictions">
+            <h2>Prediction</h2>
+          <!-- Predictions will be dynamically updated here -->
+        </div>
+    </div>
+        <!-- </div> -->
+      </div>
+      <div class="table-section-1">
+
+      <div class="table-section">
+        <h2>Area of All Played Cards</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Card Type</th>
+              <th>Played</th>
+              <th>Total in Deck</th>
+              <th>Played %</th>
+            </tr>
+          </thead>
+          <tbody id="card-data">
+            <!-- Dynamic rows will be inserted here -->
+          </tbody>
+        </table>
+        </div>
+        <div class="section-1">
+            <h3>Statistical Variance from All Decks Analyzed So Far</h3>
+            <div class="chart">
+              <div class="bar">
+                <div class="label">Round 1</div>
+                <div class="value" style="width: 60%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 2</div>
+                <div class="value orange" style="width: 80%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 3</div>
+                <div class="value purple" style="width: 40%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 4</div>
+                <div class="value" style="width: 50%"></div>
+              </div>
+              <div class="bar">
+                <div class="label">Round 5</div>
+                <div class="value pink" style="width: 90%"></div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    </div>
+    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
+    <script>
+      document
+        .getElementById("startCapture")
+        .addEventListener("click", async () => {
+          try {
+            const videoElement = document.getElementById("video");
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+              video: true,
+            });
+            videoElement.srcObject = stream;
+
+            const socket = io("http://localhost:5000/video_frame"); // Replace with your backend URL if deployed remotely
+
+            // Capture frames and send them to the backend
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            function sendFrame() {
+              if (videoElement.readyState === videoElement.HAVE_ENOUGH_DATA) {
+                // Set canvas dimensions to match video
+                canvas.width = videoElement.videoWidth;
+                canvas.height = videoElement.videoHeight;
+
+                // Draw the current video frame onto the canvas
+                ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+                // Convert the canvas content to a base64 image
+                const frameData = canvas.toDataURL("image/jpeg", 0.8); // Adjust quality if needed
+
+                // Emit the frame data to the backend
+                socket.emit("video_frame", frameData);
+              }
+
+              // Continue sending frames at a regular interval
+              requestAnimationFrame(sendFrame);
+            }
+
+            // Start sending frames
+            sendFrame();
+
+            // Listen for predictions from the backend
+            socket.on("predictions", (data) => {
+                console.log("Predictions:", data);
+                updateUI(data); // Function to update the UI with predictions
+              const cardStatistics = data.card_statistics; 
+              updateTable(cardStatistics);
+            });
+
+            socket.on("connect", () => {
+              console.log("Connected to backend.");
+            });
+
+            socket.on("disconnect", () => {
+              console.log("Disconnected from backend.");
+            });
+
+            function updateTable(data) {
+              const tbody = document.getElementById("card-data");
+              tbody.innerHTML = ""; // Clear existing rows
+
+              data.forEach((row) => {
+                const tr = document.createElement("tr");
+
+                // Create cells for each data field
+                const cardTypeCell = document.createElement("td");
+                cardTypeCell.textContent = row["Card Type"];
+
+                const playedCell = document.createElement("td");
+                playedCell.textContent = row["Played"];
+
+                const totalCell = document.createElement("td");
+                totalCell.textContent = row["Total in Deck"];
+
+                const playedPercentCell = document.createElement("td");
+                playedPercentCell.textContent = `${row["Played %"]}%`;
+
+                // Append cells to the row
+                tr.appendChild(cardTypeCell);
+                tr.appendChild(playedCell);
+                tr.appendChild(totalCell);
+                tr.appendChild(playedPercentCell);
+
+                // Append row to the table body
+                tbody.appendChild(tr);
+              });
+            }
+
+            function updateUI(predictions) {
+              const predictionsContainer =
+                document.getElementById("predictions");
+
+              if (!predictionsContainer) {
+                console.error("No container found for predictions!");
+                return;
+              }
+
+              // Clear previous predictions
+              predictionsContainer.innerHTML = "";
+
+              // Display total card value
+              const totalValueElement = document.createElement("p");
+              totalValueElement.textContent = `Total Value: ${predictions.total_value}`;
+              predictionsContainer.appendChild(totalValueElement);
+
+              // Display detected cards
+              predictions.frame_results.forEach((result) => {
+                const cardElement = document.createElement("p");
+                cardElement.textContent = `Card: ${result.card}, Confidence: ${(
+                  result.confidence * 100
+                ).toFixed(2)}%`;
+                predictionsContainer.appendChild(cardElement);
+              });
+            }
+          } catch (err) {
+            console.error("Error capturing video:", err);
+          }
+        });
+    </script>
+  </body>
+</html>
